@@ -1,0 +1,1 @@
+./gradlew lib:app:bootRun

@@ -1,0 +1,16 @@
+!gradle-wrapper.jar
+secrets.yaml
+data
+.env
+out
+build
+target
+.DS_Store
+**/*.iml
+.idea
+.vscode
+.kotlin
+.gradle
+.sdkmanrc
+.python_version
+.hprof
