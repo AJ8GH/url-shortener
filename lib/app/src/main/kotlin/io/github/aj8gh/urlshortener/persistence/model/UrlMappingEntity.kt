@@ -1,5 +1,6 @@
 package io.github.aj8gh.urlshortener.persistence.model
 
+import io.github.aj8gh.urlshortener.service.model.UrlMapping
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -12,7 +13,7 @@ data class UrlMappingEntity(
   @Id
   val shortUrlPath: String,
   val longUrl: String,
-  val expiresAt: Instant = Instant.MAX,
+  val expiresAt: Instant? = null,
   @CreationTimestamp
   @Column(updatable = false, nullable = false)
   val createdAt: Instant? = null,
@@ -28,3 +29,8 @@ data class UrlMappingEntity(
   override fun toString() =
     "(shortUrlPath=$shortUrlPath, longUrl=$longUrl, expiresAt=$expiresAt)"
 }
+
+fun toEntity(model: UrlMapping) = UrlMappingEntity(
+  shortUrlPath = model.shortUrlPath,
+  longUrl = model.longUrl,
+)

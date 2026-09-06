@@ -1,7 +1,7 @@
 package io.github.aj8gh.urlshortener.api.controller
 
 import io.github.aj8gh.urlshortener.api.model.ShortUrlRequest
-import io.github.aj8gh.urlshortener.api.model.ShortUrlResponse
+import io.github.aj8gh.urlshortener.api.model.toResponse
 import io.github.aj8gh.urlshortener.service.ShortUrlService
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.web.bind.annotation.PostMapping
@@ -21,8 +21,5 @@ class ShortUrlController(
 
   @PostMapping
   fun create(@RequestBody request: ShortUrlRequest) =
-    ShortUrlResponse(
-      longUrl = request.longUrl,
-      shortUrl = service.create(request.longUrl)
-    )
+    toResponse(service.create(request.longUrl))
 }

@@ -18,7 +18,7 @@ class DatabaseSteps(
   fun urlMappingPersisted(longUrl: String, shortPath: String) {
     val actual = repository.findById(shortPath).orElseThrow()
     actual.longUrl shouldBeEqual longUrl
-    actual.shortUrlPath shouldBeEqual "$scheme://$host$shortPath"
+    actual.shortUrlPath shouldBeEqual shortPath
     shouldNotBeNull { actual.createdAt }
     shouldNotBeNull { actual.updatedAt }
   }

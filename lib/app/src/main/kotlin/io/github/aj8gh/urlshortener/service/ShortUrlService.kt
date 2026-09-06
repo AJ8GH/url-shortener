@@ -1,15 +1,24 @@
 package io.github.aj8gh.urlshortener.service
 
-import org.springframework.beans.factory.annotation.Value
+import io.github.aj8gh.urlshortener.persistence.UrlMappingRepository
+import io.github.aj8gh.urlshortener.persistence.model.toEntity
+import io.github.aj8gh.urlshortener.service.model.UrlMapping
 import org.springframework.stereotype.Service
 
 @Service
 class ShortUrlService(
   private val counter: AtomicCounterService,
-  @Value("\${app.scheme}") private val scheme: String,
-  @Value("\${app.host}") private val host: String,
+  private val repository: UrlMappingRepository,
+  private val baseUrlProvider: BaseUrlProvider,
 ) {
-  fun create(longUrl: String) = counter.incrementAndGet().toString().let {
-    "$scheme://$host/$it"
+  fun create(longUrl: String): UrlMapping {
+    val shortPath = counter.incrementAndGet().toString()
+    val mapping = UrlMapping(
+      shortUrlPath = shortPath,
+      shortBaseUrl = baseUrlProvider.get(),
+      longUrl = longUrl,
+    )
+    repository.save(toEntity(mapping))
+    return mapping
   }
 }
