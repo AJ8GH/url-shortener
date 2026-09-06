@@ -1,17 +1,23 @@
 [versions]
 java = "25"
 kotlin = "2.4.10"
-kotlin-logging = "8.0.4"
+
+cucumber = "7.34.7"
+embedded-postgres = "2.2.2"
+embedded-database-spring-test = "2.8.0"
+embedded-redis = "1.4.4"
 junit = "6.1.3"
+kotest = "6.2.4"
+kotlin-logging = "8.0.4"
+kover = "0.9.9"
+liquibase = "5.0.4"
+netty = "4.2.17.Final"
+postgresql = "42.7.13"
 spring-boot = "4.1.1"
 spring-dependency-management = "1.1.7"
-kover = "0.9.9"
-cucumber = "7.34.7"
-kotest = "6.2.4"
-embedded-redis = "1.4.4"
-netty = "4.2.17.Final"
 
 [plugins]
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
@@ -21,6 +27,7 @@ kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 [libraries]
 kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging-jvm", version.ref = "kotlin-logging" }
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
+liquibase-core = { group = "org.liquibase", name = "liquibase-core", version.ref = "liquibase" }
 netty-buffer = { group = "io.netty", name = "netty-buffer", version.ref = "netty" }
 netty-common = { group = "io.netty", name = "netty-common", version.ref = "netty" }
 netty-handler = { group = "io.netty", name = "netty-handler", version.ref = "netty" }
@@ -30,7 +37,9 @@ netty-codec-base = { group = "io.netty", name = "netty-codec-base", version.ref 
 netty-codec-dns = { group = "io.netty", name = "netty-codec-dns", version.ref = "netty" }
 netty-transport = { group = "io.netty", name = "netty-transport", version.ref = "netty" }
 netty-transport-native-unix-common = { group = "io.netty", name = "netty-transport-native-unix-common", version.ref = "netty" }
+postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "postgresql" }
 spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
+spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
 spring-boot-starter-data-redis = { group = "org.springframework.boot", name = "spring-boot-starter-data-redis" }
 spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
 
@@ -38,6 +47,8 @@ cucumber-bom = { group = "io.cucumber", name = "cucumber-bom", version.ref = "cu
 cucumber-java = { group = "io.cucumber", name = "cucumber-java" }
 cucumber-junit-platform-engine = { group = "io.cucumber", name = "cucumber-junit-platform-engine" }
 cucumber-spring = { group = "io.cucumber", name = "cucumber-spring" }
+embedded-database-spring-test = { group = "io.zonky.test", name = "embedded-database-spring-test", version.ref = "embedded-database-spring-test" }
+embedded-postgres = { group = "io.zonky.test", name = "embedded-postgres", version.ref = "embedded-postgres" }
 embedded-redis = { group = "com.github.codemonstur", name = "embedded-redis", version.ref = "embedded-redis" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit" }
 junit-platform-engine = { group = "org.junit.platform", name = "junit-platform-engine", version.ref = "junit" }
@@ -50,6 +61,8 @@ kotest-assertions-core = { group = "io.kotest", name = "kotest-assertions-core",
 app = [
   "kotlin-logging",
   "kotlin-reflect",
+  "liquibase-core",
+  "postgresql",
   "netty-buffer",
   "netty-codec-base",
   "netty-codec-dns",
@@ -60,6 +73,7 @@ app = [
   "netty-transport",
   "netty-transport-native-unix-common",
   "spring-boot-starter-actuator",
+  "spring-boot-starter-data-jpa",
   "spring-boot-starter-data-redis",
   "spring-boot-starter-web",
 ]
@@ -68,6 +82,8 @@ componentTest = [
   "cucumber-java",
   "cucumber-junit-platform-engine",
   "cucumber-spring",
+  "embedded-database-spring-test",
+  "embedded-postgres",
   "embedded-redis",
   "junit-platform-engine",
   "junit-platform-suite",

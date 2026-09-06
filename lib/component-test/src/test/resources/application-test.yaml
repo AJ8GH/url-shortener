@@ -1,0 +1,9 @@
+---
+zonky:
+  test:
+    database:
+      type: postgres
+
+logging:
+  level:
+    org.springframework: INFO
