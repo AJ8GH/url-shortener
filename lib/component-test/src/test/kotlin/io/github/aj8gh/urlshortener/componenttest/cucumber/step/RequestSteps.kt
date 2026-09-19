@@ -49,6 +49,15 @@ class RequestSteps(
       .also { context.response = it }
   }
 
+  @When("I make request to delete url mapping for path {}")
+  fun deleteShortUrl(path: String) {
+    client.delete()
+      .uri(SHORT_URL_PATH_WITH_PARAM, path)
+      .retrieve()
+      .toEntity(Void::class.java)
+      .also { context.response = it }
+  }
+
   private fun errorHandler(
     req: HttpRequest,
     res: ClientHttpResponse,

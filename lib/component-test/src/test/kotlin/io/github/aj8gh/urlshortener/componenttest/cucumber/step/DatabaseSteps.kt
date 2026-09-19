@@ -5,6 +5,7 @@ import io.github.aj8gh.urlshortener.componenttest.context.ScenarioContext
 import io.github.aj8gh.urlshortener.persistence.repository.UrlMappingRepository
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Value
 
 class DatabaseSteps(
@@ -21,5 +22,10 @@ class DatabaseSteps(
     actual.shortUrlPath shouldBeEqual shortPath
     shouldNotBeNull { actual.createdAt }
     shouldNotBeNull { actual.updatedAt }
+  }
+
+  @Then("no url mappings are persisted")
+  fun noUrlMappingsPersisted() {
+    repository.count() shouldBe 0
   }
 }

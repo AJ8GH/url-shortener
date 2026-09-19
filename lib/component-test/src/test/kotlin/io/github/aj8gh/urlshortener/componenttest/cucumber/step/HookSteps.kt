@@ -4,22 +4,22 @@ import io.cucumber.java.Before
 import io.github.aj8gh.urlshortener.service.AtomicCounterService
 import org.springframework.jdbc.core.JdbcTemplate
 
+private const val GET_TABLE_NAMES =
+  "select tablename from pg_tables where schemaname = 'public'"
+
 class HookSteps(
-  private val jdbcRepository: JdbcTemplate,
-  private val atomicCounterService: AtomicCounterService,
+  private val template: JdbcTemplate,
+  private val counter: AtomicCounterService,
 ) {
 
   @Before
   fun before() {
     clearTables()
-    atomicCounterService.reset()
+    counter.reset()
   }
 
-  private fun clearTables() {
-    val tables = jdbcRepository.queryForList(
-      "select tablename from pg_tables where schemaname = 'public'",
-      String::class.java
-    ).joinToString(", ") { "public.$it" }
-    jdbcRepository.execute("truncate table $tables restart identity cascade")
-  }
+  private fun clearTables() = GET_TABLE_NAMES
+    .let { template.queryForList(it, String::class.java) }
+    .joinToString(", ") { "public.$it" }
+    .let { template.execute("truncate table $it restart identity cascade") }
 }

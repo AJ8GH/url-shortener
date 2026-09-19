@@ -4,6 +4,8 @@ import io.github.aj8gh.urlshortener.api.model.ShortUrlRequest
 import io.github.aj8gh.urlshortener.api.model.toResponse
 import io.github.aj8gh.urlshortener.service.ShortUrlService
 import org.springframework.http.HttpStatus.CREATED
+import org.springframework.http.HttpStatus.NO_CONTENT
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -30,4 +32,9 @@ class ShortUrlController(
   @GetMapping(SHORT_URL_PATH_PARAM)
   fun get(@PathVariable path: String) =
     toResponse(service.get(path))
+
+  @DeleteMapping(SHORT_URL_PATH_PARAM)
+  @ResponseStatus(NO_CONTENT)
+  fun delete(@PathVariable path: String) =
+    service.delete(path)
 }
