@@ -2,7 +2,7 @@ package io.github.aj8gh.urlshortener.componenttest.cucumber.step
 
 import io.cucumber.java.en.Then
 import io.github.aj8gh.urlshortener.componenttest.context.ScenarioContext
-import io.github.aj8gh.urlshortener.persistence.UrlMappingRepository
+import io.github.aj8gh.urlshortener.persistence.repository.UrlMappingRepository
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldNotBeNull
 import org.springframework.beans.factory.annotation.Value

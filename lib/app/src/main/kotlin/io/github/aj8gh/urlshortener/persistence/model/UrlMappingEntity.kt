@@ -34,3 +34,11 @@ fun toEntity(model: UrlMapping) = UrlMappingEntity(
   shortUrlPath = model.shortUrlPath,
   longUrl = model.longUrl,
 )
+
+fun fromEntity(entity: UrlMappingEntity, shortBaseUrl: String) =
+  UrlMapping(
+    shortUrlPath = entity.shortUrlPath,
+    shortBaseUrl = shortBaseUrl,
+    longUrl = entity.longUrl,
+    expiresAt = entity.expiresAt,
+  )

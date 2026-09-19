@@ -1,4 +1,4 @@
-package io.github.aj8gh.urlshortener.persistence
+package io.github.aj8gh.urlshortener.persistence.repository
 
 import io.github.aj8gh.urlshortener.persistence.model.UrlMappingEntity
 import org.springframework.data.jpa.repository.JpaRepository
