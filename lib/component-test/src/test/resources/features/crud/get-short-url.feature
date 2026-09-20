@@ -1,4 +1,4 @@
-Feature: Create short url
+Feature: Create short URL
 
   Scenario: Get happy path
     Given I make request to create short url for https://example.com

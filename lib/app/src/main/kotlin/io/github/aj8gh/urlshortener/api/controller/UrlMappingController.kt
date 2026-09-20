@@ -1,8 +1,8 @@
 package io.github.aj8gh.urlshortener.api.controller
 
-import io.github.aj8gh.urlshortener.api.model.ShortUrlRequest
+import io.github.aj8gh.urlshortener.api.model.UrlMappingRequest
 import io.github.aj8gh.urlshortener.api.model.toResponse
-import io.github.aj8gh.urlshortener.service.ShortUrlService
+import io.github.aj8gh.urlshortener.service.UrlMappingService
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -20,13 +20,13 @@ const val SHORT_URL_PATH_WITH_PARAM = "$SHORT_URL_PATH$SHORT_URL_PATH_PARAM"
 
 @RestController
 @RequestMapping(SHORT_URL_PATH)
-class ShortUrlController(
-  private val service: ShortUrlService,
+class UrlMappingController(
+  private val service: UrlMappingService,
 ) {
 
   @PostMapping
   @ResponseStatus(CREATED)
-  fun create(@RequestBody request: ShortUrlRequest) =
+  fun create(@RequestBody request: UrlMappingRequest) =
     toResponse(service.create(request.longUrl))
 
   @GetMapping(SHORT_URL_PATH_PARAM)

@@ -8,7 +8,7 @@ import io.github.aj8gh.urlshortener.service.model.UrlMapping
 import org.springframework.stereotype.Service
 
 @Service
-class ShortUrlService(
+class UrlMappingService(
   private val counter: AtomicCounterService,
   private val repository: UrlMappingRepository,
   private val baseUrlProvider: BaseUrlProvider,

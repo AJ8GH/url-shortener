@@ -2,9 +2,10 @@ package io.github.aj8gh.urlshortener.componenttest.cucumber.step
 
 import io.cucumber.java.en.When
 import io.github.aj8gh.urlshortener.api.controller.SHORT_URL_PATH
+import io.github.aj8gh.urlshortener.api.controller.SHORT_URL_PATH_PARAM
 import io.github.aj8gh.urlshortener.api.controller.SHORT_URL_PATH_WITH_PARAM
 import io.github.aj8gh.urlshortener.api.model.ErrorResponse
-import io.github.aj8gh.urlshortener.api.model.ShortUrlRequest
+import io.github.aj8gh.urlshortener.api.model.UrlMappingRequest
 import io.github.aj8gh.urlshortener.api.model.ShortUrlResponse
 import io.github.aj8gh.urlshortener.componenttest.context.ScenarioContext
 import io.github.oshai.kotlinlogging.KotlinLogging
@@ -43,7 +44,7 @@ class RequestSteps(
   fun createShortUrl(longUrl: String) {
     client.post()
       .uri(SHORT_URL_PATH)
-      .body(ShortUrlRequest(longUrl))
+      .body(UrlMappingRequest(longUrl))
       .retrieve()
       .toEntity(ShortUrlResponse::class.java)
       .also { context.response = it }
@@ -55,6 +56,15 @@ class RequestSteps(
       .uri(SHORT_URL_PATH_WITH_PARAM, path)
       .retrieve()
       .toEntity(Void::class.java)
+      .also { context.response = it }
+  }
+
+  @When("I make request to access url mapping for path {}")
+  fun accessShortUrl(path: String) {
+    client.get()
+      .uri(SHORT_URL_PATH_PARAM, path)
+      .retrieve()
+      .toEntity(String::class.java)
       .also { context.response = it }
   }
 

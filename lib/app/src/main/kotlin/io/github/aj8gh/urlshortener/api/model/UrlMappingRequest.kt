@@ -1,5 +1,5 @@
 package io.github.aj8gh.urlshortener.api.model
 
-data class ShortUrlRequest(
+data class UrlMappingRequest(
   val longUrl: String,
 )

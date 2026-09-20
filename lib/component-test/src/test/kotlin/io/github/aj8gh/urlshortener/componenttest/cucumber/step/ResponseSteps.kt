@@ -4,6 +4,7 @@ import io.cucumber.java.en.Then
 import io.github.aj8gh.urlshortener.api.model.ErrorResponse
 import io.github.aj8gh.urlshortener.api.model.ShortUrlResponse
 import io.github.aj8gh.urlshortener.componenttest.context.ScenarioContext
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
@@ -36,5 +37,10 @@ class ResponseSteps(
       shouldNotBeNull { it.id }
       shouldNotBeNull { it.timestamp }
     }
+  }
+
+  @Then("the response contains header {}: {}")
+  fun responseContainsHeader(header: String, value: String) {
+    context.response!!.headers.get(header)!! shouldContainExactly listOf(value)
   }
 }

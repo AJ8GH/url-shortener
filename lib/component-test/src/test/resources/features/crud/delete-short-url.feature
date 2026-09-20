@@ -1,4 +1,4 @@
-Feature: Delete short url
+Feature: Delete short URL
 
   Scenario: Delete happy path
     Given I make request to create short url for https://example.com
