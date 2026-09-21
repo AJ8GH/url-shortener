@@ -27,7 +27,7 @@ class UrlMappingService(
 
   fun get(shortUrl: String) = repository.findById(shortUrl)
     .orElseThrow {
-      ResourceNotFoundException("no url mapping found for short-url path $shortUrl")
+      ResourceNotFoundException("no url-mapping found for short-url path $shortUrl")
     }.let { fromEntity(it, baseUrlProvider.get()) }
 
   fun delete(shortUrl: String) = repository.deleteById(shortUrl)

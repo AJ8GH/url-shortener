@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
-const val SHORT_URL_PATH = "/short-url"
-const val SHORT_URL_PATH_PARAM = "/{path}"
-const val SHORT_URL_PATH_WITH_PARAM = "$SHORT_URL_PATH$SHORT_URL_PATH_PARAM"
+const val URL_MAPPING_PATH = "/url-mapping"
+const val URL_MAPPING_PATH_PARAM = "/{path}"
+const val URL_MAPPING_PATH_WITH_PARAM = "$URL_MAPPING_PATH$URL_MAPPING_PATH_PARAM"
 
 @RestController
-@RequestMapping(SHORT_URL_PATH)
+@RequestMapping(URL_MAPPING_PATH)
 class UrlMappingController(
   private val service: UrlMappingService,
 ) {
@@ -29,11 +29,11 @@ class UrlMappingController(
   fun create(@RequestBody request: UrlMappingRequest) =
     toResponse(service.create(request.longUrl))
 
-  @GetMapping(SHORT_URL_PATH_PARAM)
+  @GetMapping(URL_MAPPING_PATH_PARAM)
   fun get(@PathVariable path: String) =
     toResponse(service.get(path))
 
-  @DeleteMapping(SHORT_URL_PATH_PARAM)
+  @DeleteMapping(URL_MAPPING_PATH_PARAM)
   @ResponseStatus(NO_CONTENT)
   fun delete(@PathVariable path: String) =
     service.delete(path)

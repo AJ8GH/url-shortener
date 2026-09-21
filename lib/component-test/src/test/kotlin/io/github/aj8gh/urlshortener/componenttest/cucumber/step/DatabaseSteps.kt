@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Value
 class DatabaseSteps(
   private val context: ScenarioContext,
   private val repository: UrlMappingRepository,
-  @Value("\${app.scheme}") private val scheme: String,
-  @Value("\${app.host}") private val host: String,
+  @Value("\${app.api.scheme}") private val scheme: String,
+  @Value("\${app.api.host}") private val host: String,
 ) {
 
-  @Then("url mapping {} to path {} is persisted")
+  @Then("url-mapping {} to path {} is persisted")
   fun urlMappingPersisted(longUrl: String, shortPath: String) {
     val actual = repository.findById(shortPath).orElseThrow()
     actual.longUrl shouldBeEqual longUrl
@@ -24,7 +24,7 @@ class DatabaseSteps(
     shouldNotBeNull { actual.updatedAt }
   }
 
-  @Then("no url mappings are persisted")
+  @Then("no url-mappings are persisted")
   fun noUrlMappingsPersisted() {
     repository.count() shouldBe 0
   }

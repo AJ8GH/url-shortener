@@ -1,9 +1,15 @@
 ---
-db:
-  name: url_shortener
-  host: localhost
+app:
+  api:
+    scheme: ${APP_SCHEME:http}
+    host: ${APP_HOST:localhost}
+  db:
+    name: url_shortener
+    host: localhost
 
 spring:
+  config:
+    import: optional:secrets.yaml
   output:
     ansi:
       enabled: ALWAYS
@@ -12,12 +18,13 @@ spring:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
   jpa:
+    # defer-datasource-initialization: true
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://${DB_HOST:${db.host}}:5432/${POSTGRES_DB:${db.name}}
-    username: ${POSTGRES_USER:${db.name}}
-    password: ${POSTGRES_PASSWORD:${db.password}}
+    url: jdbc:postgresql://${DB_HOST:${app.db.host}}:5432/${POSTGRES_DB:${app.db.name}}
+    username: ${POSTGRES_USER:${app.db.name}}
+    password: ${POSTGRES_PASSWORD:${app.db.password}}
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
@@ -35,7 +42,3 @@ server:
 logging:
   level:
     org.springframework: INFO
-
-app:
-  scheme: ${APP_SCHEME:http}
-  host: ${APP_HOST:localhost}

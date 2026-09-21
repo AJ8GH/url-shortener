@@ -1,15 +1,15 @@
-Feature: Access short URL
+Feature: Create short URL mapping
 
-  Scenario: Access happy path
+  Scenario: Get happy path
     Given I make request to create url-mapping for https://example.com
     And the response status code is 201
     And the response contains url-mapping https://example.com to path 1
-    When I make request to access url-mapping for path 1
-    Then the response status code is 302
-    And the response contains header Location: https://example.com
+    When I make request to get url-mapping for path 1
+    Then the response status code is 200
+    And the response contains url-mapping https://example.com to path 1
 
-  Scenario: Access 404
+  Scenario: Get 404
     Given no url-mappings are persisted
-    When I make request to access non-existent url-mapping for path 1
+    When I make request to get non-existent url-mapping for path 1
     Then the response status code is 404
     And the response contains error message no url-mapping found for short-url path 1

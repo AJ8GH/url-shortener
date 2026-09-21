@@ -1,0 +1,7 @@
+Feature: Create short URL mapping
+
+  Scenario: Create happy path
+    When I make request to create url-mapping for https://example.com
+    Then the response status code is 201
+    And the response contains url-mapping https://example.com to path 1
+    And url-mapping https://example.com to path 1 is persisted

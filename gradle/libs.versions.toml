@@ -41,6 +41,7 @@ postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "pos
 spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
 spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
 spring-boot-starter-data-redis = { group = "org.springframework.boot", name = "spring-boot-starter-data-redis" }
+spring-boot-starter-liquibase = { group = "org.springframework.boot", name = "spring-boot-starter-liquibase" }
 spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
 
 cucumber-bom = { group = "io.cucumber", name = "cucumber-bom", version.ref = "cucumber" }
@@ -76,6 +77,7 @@ app = [
   "spring-boot-starter-data-jpa",
   "spring-boot-starter-data-redis",
   "spring-boot-starter-web",
+  "spring-boot-starter-liquibase",
 ]
 
 componentTest = [

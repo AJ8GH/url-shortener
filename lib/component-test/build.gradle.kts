@@ -13,3 +13,12 @@ dependencies {
   testImplementation(rootProject.libs.bundles.app)
   testImplementation(project(":lib:app"))
 }
+
+tasks.test {
+  useJUnitPlatform()
+  finalizedBy(tasks.koverVerify)
+}
+
+tasks.bootJar {
+  enabled = false
+}

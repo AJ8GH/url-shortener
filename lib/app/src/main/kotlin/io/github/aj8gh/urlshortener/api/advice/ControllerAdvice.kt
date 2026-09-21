@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import java.time.Clock
 import java.util.*
+import java.util.UUID.randomUUID
 
 val log = KotlinLogging.logger { }
 
@@ -26,7 +27,7 @@ class ControllerAdvice(
   fun handleResourceNotFound(e: ResourceNotFoundException) = handle(e)
 
   private fun handle(e: Exception) = ErrorResponse(
-    id = UUID.randomUUID(),
+    id = randomUUID(),
     message = e.message ?: "No message available",
     timestamp = clock.instant(),
   ).also {

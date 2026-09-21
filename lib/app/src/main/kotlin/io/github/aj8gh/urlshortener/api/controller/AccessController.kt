@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(SHORT_URL_PATH_PARAM)
+@RequestMapping(URL_MAPPING_PATH_PARAM)
 class AccessController(
   private val service: UrlMappingService,
 ) {

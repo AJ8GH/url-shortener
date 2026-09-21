@@ -2,7 +2,7 @@ package io.github.aj8gh.urlshortener.componenttest.cucumber.step
 
 import io.cucumber.java.en.Then
 import io.github.aj8gh.urlshortener.api.model.ErrorResponse
-import io.github.aj8gh.urlshortener.api.model.ShortUrlResponse
+import io.github.aj8gh.urlshortener.api.model.UrlMappingResponse
 import io.github.aj8gh.urlshortener.componenttest.context.ScenarioContext
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.equals.shouldBeEqual
@@ -13,8 +13,8 @@ import org.springframework.http.HttpStatus
 
 class ResponseSteps(
   private val context: ScenarioContext,
-  @Value("\${app.scheme}") private val scheme: String,
-  @Value("\${app.host}") private val host: String,
+  @Value("\${app.api.scheme}") private val scheme: String,
+  @Value("\${app.api.host}") private val host: String,
 ) {
 
   @Then("the response status code is {}")
@@ -22,9 +22,9 @@ class ResponseSteps(
     context.status() shouldBe HttpStatus.valueOf(expected)
   }
 
-  @Then("the response contains url mapping {} to path {}")
+  @Then("the response contains url-mapping {} to path {}")
   fun responseContainsUrlMapping(longUrl: String, shortPath: String) {
-    context.body<ShortUrlResponse>().let {
+    context.body<UrlMappingResponse>().let {
       it.shortUrl shouldBeEqual "$scheme://$host/$shortPath"
       it.longUrl shouldBeEqual longUrl
     }
