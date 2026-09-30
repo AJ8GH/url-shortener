@@ -12,18 +12,20 @@ class UrlMappingService(
   private val counter: AtomicCounterService,
   private val repository: UrlMappingRepository,
   private val baseUrlProvider: BaseUrlProvider,
+  private val encodingService: EncodingService,
 ) {
 
-  fun create(longUrl: String): UrlMapping {
-    val shortPath = counter.incrementAndGet().toString()
-    val mapping = UrlMapping(
-      shortUrlPath = shortPath,
-      shortBaseUrl = baseUrlProvider.get(),
-      longUrl = longUrl,
-    )
-    repository.saveAndFlush(toEntity(mapping))
-    return mapping
-  }
+  fun create(longUrl: String) =
+    counter.incrementAndGet()
+      .let { encodingService.encode(it) }
+      .let {
+        UrlMapping(
+          shortUrlPath = it,
+          shortBaseUrl = baseUrlProvider.get(),
+          longUrl = longUrl,
+        )
+      }
+      .also { repository.saveAndFlush(toEntity(it)) }
 
   fun get(shortUrl: String) = repository.findById(shortUrl)
     .orElseThrow {

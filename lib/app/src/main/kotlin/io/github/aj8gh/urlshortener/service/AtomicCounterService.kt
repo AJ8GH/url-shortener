@@ -13,4 +13,6 @@ class AtomicCounterService(
   fun incrementAndGet() = counter.incrementAndGet()
 
   fun reset() = counter.set(0)
+
+  fun set(count: Long) = counter.set(count)
 }
